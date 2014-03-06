@@ -102,35 +102,29 @@ class gitolite(
     }
   }
 
+  File {
+    owner => $user_name,
+    group => $group_name,
+    mode => '0640',
+  }
+
   file { $home_path:
     ensure => directory,
-    owner  => $user_name,
-    group  => $group_name,
-    mode   => '0750',
   }
 
   file { "${home_path}/bin":
     ensure  => directory,
-    owner   => $user_name,
-    group   => $group_name,
-    mode    => '0750',
     recurse => true,
   }
 
   file { "${home_path}/repositories":
     ensure  => directory,
-    owner   => $user_name,
-    group   => $group_name,
-    mode    => '0750',
     recurse => true,
   }
 
   file { 'admin_key':
     ensure  => file,
     path    => "${home_path}/${key_user}.pub",
-    owner   => $user_name,
-    group   => $group_name,
-    mode    => '0750',
     content => $pubkey,
   }
 
