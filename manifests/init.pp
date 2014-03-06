@@ -107,7 +107,7 @@ class gitolite(
     owner  => $user_name,
     group  => $group_name,
     mode   => '0750',
-  } ->
+  }
 
   file { "${home_path}/bin":
     ensure  => directory,
@@ -115,7 +115,7 @@ class gitolite(
     group   => $group_name,
     mode    => '0750',
     recurse => true,
-  } ->
+  }
 
   file { "${home_path}/repositories":
     ensure  => directory,
