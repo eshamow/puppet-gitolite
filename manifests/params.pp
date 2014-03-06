@@ -9,7 +9,7 @@ class gitolite::params {
   $source_path     = 'git://github.com/sitaramc/gitolite'
   $key_user        = undef
   $pubkey          = undef
-  $manage_perl     = false
+  $manage_perl     = true
 
   case $::osfamily {
     'redhat': {
