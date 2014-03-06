@@ -78,11 +78,11 @@ class gitolite(
     fail('Must define key_user and pass pubkey')
   }
 
-  if ($manage_perl == 'package' and $perl_package == undef) {
+  if ($manage_perl == true and $perl_package == undef) {
     fail("Perl package is undefined for osfamily ${::osfamily}.")
   }
 
-  if $manage_perl == 'package' {
+  if $manage_perl == true {
     package { $gitolite::params::perl_package:
       ensure => installed,
     }
