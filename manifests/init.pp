@@ -78,11 +78,11 @@ class gitolite(
     fail('Must define key_user and pass pubkey')
   }
 
-  if ($manage_perl == 'package' and $perl_package == undef) {
+  if ($manage_perl == true and $perl_package == undef) {
     fail("Perl package is undefined for osfamily ${::osfamily}.")
   }
 
-  if $manage_perl == 'package' {
+  if $manage_perl == true {
     package { $gitolite::params::perl_package:
       ensure => installed,
     }
@@ -103,35 +103,29 @@ class gitolite(
     }
   }
 
+  File {
+    owner => $user_name,
+    group => $group_name,
+    mode => '0640',
+  }
+
   file { $home_path:
     ensure => directory,
-    owner  => $user_name,
-    group  => $group_name,
-    mode   => '0750',
-  } ->
+  }
 
   file { "${home_path}/bin":
     ensure  => directory,
-    owner   => $user_name,
-    group   => $group_name,
-    mode    => '0750',
     recurse => true,
-  } ->
+  }
 
   file { "${home_path}/repositories":
     ensure  => directory,
-    owner   => $user_name,
-    group   => $group_name,
-    mode    => '0750',
     recurse => true,
   }
 
   file { 'admin_key':
     ensure  => file,
     path    => "${home_path}/${key_user}.pub",
-    owner   => $user_name,
-    group   => $group_name,
-    mode    => '0750',
     content => $pubkey,
   }
 
