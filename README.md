@@ -27,6 +27,16 @@ RHEL 5 and 6
 Debian 6 and 7
 Ubuntu 12.04
 
+##Example Usage
+
+Install gitolite with defaults, supplying a public key for the 'admin' user.
+```puppet
+class { 'gitolite':
+  key_user => 'admin',
+  pubkey   => 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQ...',
+}
+```
+
 ##Setup
 
 ###What [eshamow-gitolite] affects
@@ -40,8 +50,8 @@ Ubuntu 12.04
 
 * Expects 'git' binary to be installed/available. puppetlabs-git suffices for most systems.
 * Time::HiRes perl module must be installed/available. manage_perl => true will attempt to install via package manager only.
-  
-###Beginning with [eshamow-gitolite]  
+
+###Beginning with [eshamow-gitolite]
 
 Classify node with gitolite and ensure that at a minimum key_user and pubkey parameters are configured in your Node Classifier or via data bindings.
 
